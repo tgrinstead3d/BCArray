@@ -64,7 +64,7 @@ const getNewArray = () => {
     <br/>
     <div>
       <button>Calculate Wages</button>
-      <h4>Total Earnings: {{ sum }}</h4>
+      <h4>Total Earnings: ${{ sum }}</h4>
     </div>
   </form>
 </template>
