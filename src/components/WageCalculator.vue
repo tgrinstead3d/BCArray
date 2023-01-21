@@ -36,6 +36,19 @@ const getNewArray = () => {
     sum = wageArray.value.reduce((a, b) => a + b.value, 0)
 }
 
+const resetArray = () => {
+  wageArray = [wage1, wage1, wage1, wage1, wage1, wage1,
+    wage2, wage2, wage2, wage2, wage2, wage2,
+    wage3, wage3, wage3, wage3, wage3, wage3,
+    wage4, wage4, wage4, wage4, wage4, wage4];
+  wage1.value = 0;
+  wage2.value = 0;
+  wage3.value = 0;
+  wage4.value = 0;
+  startTime.value = 0;
+  endTime.value = 23;
+}
+
 </script>
 
 <template>
@@ -44,7 +57,7 @@ const getNewArray = () => {
   <form @submit.prevent="calculateWage">
     <div>
       <h3>Enter Shift Start and End Times</h3>
-      <p>Enter time in 24h format</p>
+      <p>Enter time in 24h format. Example: 5 (for 5am) and 17 (for 5pm). Midnight is 0.</p>
       <p>Start:</p><input type="number" v-model.number="startTime"/>
       <p>{{ startTime }}</p>
       <p>End:</p><input type="number" v-model.number="endTime"/>
@@ -63,7 +76,8 @@ const getNewArray = () => {
     </div>
     <br/>
     <div>
-      <button>Calculate Wages</button>
+      <button v-if="wageArray.length === 24" type="submit">Calculate Wages</button>
+      <button v-if="wageArray.length !== 24" type="button" @click="resetArray">Reset</button>
       <h4>Total Earnings: ${{ sum }}</h4>
     </div>
   </form>
