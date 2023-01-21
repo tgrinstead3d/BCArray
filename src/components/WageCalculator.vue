@@ -16,10 +16,24 @@ let wageArray = ref([
   wage4, wage4, wage4, wage4, wage4, wage4
 ]);
 
+const calculateWage = () => {
+  if (startTime.value < endTime.value) {
+    getNewArray();
+    console.log("Start time is less than End time.")
+  } else {
+    getNewArray2();
+    console.log("Start time is more than End time.")
+  }
+}
+const getNewArray2 = () => {
+  wageArray.value.splice(endTime.value, (startTime.value - endTime.value));
+  sum = wageArray.value.reduce((a, b) => a + b.value, 0)
+}
 const getNewArray = () => {
-  wageArray.value.splice(endTime.value)
-  wageArray.value.splice(0, startTime.value)
-  sum = wageArray.value.reduce((a,b) => a + b.value, 0)
+
+    wageArray.value.splice(endTime.value)
+    wageArray.value.splice(0, startTime.value)
+    sum = wageArray.value.reduce((a, b) => a + b.value, 0)
 }
 
 </script>
@@ -27,7 +41,7 @@ const getNewArray = () => {
 <template>
   <h1>Wage Calculator</h1>
   <span>{{ wageArray }}</span>
-  <form @submit.prevent="getNewArray">
+  <form @submit.prevent="calculateWage">
     <div>
       <h3>Enter Shift Start and End Times</h3>
       <p>Enter time in 24h format</p>
