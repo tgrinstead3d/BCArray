@@ -19,7 +19,7 @@ let wageArray = ref([
 const getNewArray = () => {
   wageArray.value.splice(endTime.value)
   wageArray.value.splice(0, startTime.value)
-  sum = wageArray.value.reduce((a,b) => a + b.value)
+  sum = wageArray.value.reduce((a,b) => a + b.value, 0)
 }
 
 </script>
