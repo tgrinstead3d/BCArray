@@ -37,42 +37,36 @@ const getNewArray = () => {
 }
 
 const resetArray = () => {
-  wageArray = [wage1, wage1, wage1, wage1, wage1, wage1,
+  wageArray = ref([wage1, wage1, wage1, wage1, wage1, wage1,
     wage2, wage2, wage2, wage2, wage2, wage2,
     wage3, wage3, wage3, wage3, wage3, wage3,
-    wage4, wage4, wage4, wage4, wage4, wage4];
+    wage4, wage4, wage4, wage4, wage4, wage4]);
   wage1.value = 0;
   wage2.value = 0;
   wage3.value = 0;
   wage4.value = 0;
-  startTime.value = 0;
-  endTime.value = 23;
+  startTime.value = ref();
+  endTime.value = ref();
+  sum = ref();
 }
 
 </script>
 
 <template>
   <h1>Wage Calculator</h1>
-  <span>{{ wageArray }}</span>
   <form @submit.prevent="calculateWage">
     <div>
       <h3>Enter Shift Start and End Times</h3>
-      <p>Enter time in 24h format. Example: 5 (for 5am) and 17 (for 5pm). Midnight is 0.</p>
-      <p>Start:</p><input type="number" v-model.number="startTime"/>
-      <p>{{ startTime }}</p>
-      <p>End:</p><input type="number" v-model.number="endTime"/>
-      <p>{{ endTime }}</p>
+      <h5>Enter time in 24h format. Example: 5 (for 5am) and 17 (for 5pm). Midnight is 0.</h5>
+      <h4>Shift Start:</h4><input type="number" v-model.number="startTime"/>
+      <h4>Shift End:</h4><input type="number" v-model.number="endTime"/>
     </div>
     <div>
       <h3>Enter Wages For Each Time Block</h3>
-      <p>Midnight - 6AM:</p><input type="number" v-model.number="wage1"/>
-      <p>{{ wage1 }}</p>
-      <p>6AM - Noon:</p><input type="number" v-model.number="wage2"/>
-      <p>{{ wage2 }}</p>
-      <p>Noon - 6PM:</p><input type="number" v-model.number="wage3"/>
-      <p>{{ wage3 }}</p>
-      <p>6PM - Midnight:</p><input type="number" v-model.number="wage4"/>
-      <p>{{ wage4 }}</p>
+      <h4>Midnight - 6AM:</h4><input type="number" v-model.number="wage1"/>
+      <h4>6AM - Noon:</h4><input type="number" v-model.number="wage2"/>
+      <h4>Noon - 6PM:</h4><input type="number" v-model.number="wage3"/>
+      <h4>6PM - Midnight:</h4><input type="number" v-model.number="wage4"/>
     </div>
     <br/>
     <div>
