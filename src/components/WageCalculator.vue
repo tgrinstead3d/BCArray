@@ -3,7 +3,7 @@ import { ref } from 'vue';
 
 let startTime = ref();
 let endTime = ref();
-
+let msg = ref("Calculate Wages")
 let wage1 = ref();
 let wage2 = ref();
 let wage3 = ref();
@@ -17,12 +17,17 @@ let wageArray = ref([
 ]);
 
 const calculateWage = () => {
-  if (startTime.value < endTime.value) {
-    getNewArray();
-    console.log("Start time is less than End time.")
+  if (wageArray.value.length === 24) {
+    if (startTime.value < endTime.value) {
+      getNewArray();
+      msg.value = "Reset";
+    } else {
+      getNewArray2();
+      msg.value = "Reset";
+    }
   } else {
-    getNewArray2();
-    console.log("Start time is more than End time.")
+    resetArray();
+    msg.value = "Calculate Wages";
   }
 }
 const getNewArray2 = () => {
@@ -41,15 +46,14 @@ const resetArray = () => {
     wage2, wage2, wage2, wage2, wage2, wage2,
     wage3, wage3, wage3, wage3, wage3, wage3,
     wage4, wage4, wage4, wage4, wage4, wage4]);
-  wage1.value = 0;
-  wage2.value = 0;
-  wage3.value = 0;
-  wage4.value = 0;
+  wage1.value = ref();
+  wage2.value = ref();
+  wage3.value = ref();
+  wage4.value = ref();
   startTime.value = ref();
   endTime.value = ref();
   sum = ref();
 }
-
 </script>
 
 <template>
@@ -70,8 +74,7 @@ const resetArray = () => {
     </div>
     <br/>
     <div>
-      <button v-if="wageArray.length === 24" type="submit">Calculate Wages</button>
-      <button v-if="wageArray.length !== 24" type="button" @click="resetArray">Reset</button>
+      <button type="submit">{{ msg }}</button>
       <h4>Total Earnings: ${{ sum }}</h4>
     </div>
   </form>
